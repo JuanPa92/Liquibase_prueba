@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+
+    <changeSet author="juanPabloSaucedo" id="20190225-1">
+        <createTable tableName="ADDRESS">
+        	<column name="ID_ADDRESS" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="STREET" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="NUMBER" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="ZIPCODE" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="juanPabloSaucedo" id="20190225-2">
+        <createTable tableName="PERMISSION">
+        	<column name="ID_PERMISION" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="DS_PERMISSION" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="juanPabloSaucedo" id="20190225-3">
+        <createTable tableName="USER">
+            <column name="ID_USER" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="AGE" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="juanPabloSaucedo" id="20190225-4">
+        <createTable tableName="USER_PERM">
+            <column name="ID_USER_PERM" type="INT">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="juanPabloSaucedo" id="20190225-4">
+        <addForeignKeyConstraint baseColumnNames="ID_USER"
+                baseTableName="USER_PERM"
+                constraintName="FK_ID_USER"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="ID_USER"
+                referencedTableName="USER"/>
+
+        <addForeignKeyConstraint baseColumnNames="ID_PERM"
+                baseTableName="USER_PERM"
+                constraintName="FK_ID_PERM"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="ID_PERMISSION"
+                referencedTableName="PERMISSION"/>
+
+        <addForeignKeyConstraint baseColumnNames="ID_ADDRESS"
+                baseTableName="USER"
+                constraintName="FK_ID_ADDRESS"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="ID_ADDRESS"
+                referencedTableName="ADDRESS"/>
+    </changeSet>
+
+</databaseChangeLog>
+ 
