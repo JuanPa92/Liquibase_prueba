@@ -30,7 +30,7 @@
             <column name="NAME" type="VARCHAR(30)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="DS_PERMISSION" type="VARCHAR(50)">
+            <column name="DS_PERMISSION" type="VARCHAR(MAX)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
         </createTable>
@@ -45,6 +45,9 @@
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
             <column name="LAST_NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="NICK_NAME" type="VARCHAR(50)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
             <column name="PASSWORD" type="VARCHAR(50)">
@@ -64,7 +67,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="juanPabloSaucedo" id="20190225-4">
+    <changeSet author="juanPabloSaucedo" id="20190225-5">
         <addForeignKeyConstraint baseColumnNames="ID_USER"
                 baseTableName="USER_PERM"
                 constraintName="FK_ID_USER"
