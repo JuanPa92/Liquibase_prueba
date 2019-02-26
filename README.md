@@ -1,6 +1,7 @@
 # Liquibase (Copia de Juan Pablo, original de Javier Rodríguez)
 # Cambio
 ## Corregi mi error sorry :(
+## corregi mi error de hotfix
 ## Source Control for your database
 
 Es una libreria opensource para el manejo y ejecución de cambios en base de datos.
