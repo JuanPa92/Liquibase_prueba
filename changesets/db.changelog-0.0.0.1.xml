@@ -30,7 +30,7 @@
             <column name="NAME" type="VARCHAR(30)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="DESCRIPTION_PERMISSION" type="VARCHAR(MAX)">
+            <column name="DS_PERMISSION" type="VARCHAR(MAX)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
         </createTable>
@@ -47,7 +47,7 @@
             <column name="LAST_NAME" type="VARCHAR(50)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
-            <column name="USER_NAME" type="VARCHAR(50)">
+            <column name="NICK_NAME" type="VARCHAR(50)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
             <column name="PASSWORD" type="VARCHAR(50)">
@@ -69,7 +69,7 @@
 
     <changeSet author="juanPabloSaucedo" id="20190225-5">
         <addForeignKeyConstraint baseColumnNames="ID_USER"
-                baseTableName="USER_PERMISSION"
+                baseTableName="USER_PERM"
                 constraintName="FK_ID_USER"
                 deferrable="true"
                 initiallyDeferred="true"
@@ -78,9 +78,9 @@
                 referencedColumnNames="ID_USER"
                 referencedTableName="USER"/>
 
-        <addForeignKeyConstraint baseColumnNames="ID_PERMISSION"
-                baseTableName="USER_PERMISSION"
-                constraintName="FK_ID_PERMISSION"
+        <addForeignKeyConstraint baseColumnNames="ID_PERM"
+                baseTableName="USER_PERM"
+                constraintName="FK_ID_PERM"
                 deferrable="true"
                 initiallyDeferred="true"
                 onDelete="CASCADE"
