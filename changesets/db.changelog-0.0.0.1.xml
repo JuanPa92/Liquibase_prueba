@@ -34,9 +34,7 @@
                 <constraints nullable="false" primaryKey="true" unique="false"/>
             </column>
             <column name="TYPE" type="VARCHAR(30)"/>
-            </column>
             <column name="PERMISSION" type="VARCHAR(255)"/>
-            </column>
         </createTable>
     </changeSet>
 
