@@ -10,6 +10,12 @@
         	<column name="ID_ADDRESS" type="INT">
                 <constraints nullable="false" primaryKey="true" unique="false"/>
             </column>
+            <column name="STATE" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="CITY" type="VARCHAR(30)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
             <column name="STREET" type="VARCHAR(30)">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
@@ -23,15 +29,13 @@
     </changeSet>
 
     <changeSet author="juanPabloSaucedo" id="20190225-2">
-        <createTable tableName="PERMISSION">
-        	<column name="ID_PERMISION" type="INT">
+        <createTable tableName="ROL">
+        	<column name="ID_ROL" type="INT">
                 <constraints nullable="false" primaryKey="true" unique="false"/>
             </column>
-            <column name="NAME" type="VARCHAR(30)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
+            <column name="TYPE" type="VARCHAR(30)"/>
             </column>
-            <column name="DS_PERMISSION" type="VARCHAR(MAX)">
-                <constraints nullable="true" primaryKey="false" unique="false"/>
+            <column name="PERMISSION" type="VARCHAR(255)"/>
             </column>
         </createTable>
     </changeSet>
@@ -56,47 +60,46 @@
             <column name="AGE" type="INT">
                 <constraints nullable="true" primaryKey="false" unique="false"/>
             </column>
+            <column name="ADDRESS_ID" type="INT"/>
         </createTable>
     </changeSet>
 
-    <changeSet author="juanPabloSaucedo" id="20190225-4">
-        <createTable tableName="USER_PERM">
-            <column name="ID_USER_PERM" type="INT">
-                <constraints nullable="false" primaryKey="true" unique="false"/>
-            </column>
+    <changeSet author="juanPabloSaucedo" id="20190224-4">
+        <createTable tableName="JUNCTION_ROL_USER">
+            <column name="ROL_ID" type="INT"/>
+            <column name="USER_ID" type="INT"/>
         </createTable>
     </changeSet>
 
-    <changeSet author="juanPabloSaucedo" id="20190225-5">
-        <addForeignKeyConstraint baseColumnNames="ID_USER"
-                baseTableName="USER_PERM"
-                constraintName="FK_ID_USER"
-                deferrable="true"
-                initiallyDeferred="true"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"
-                referencedColumnNames="ID_USER"
-                referencedTableName="USER"/>
+    <changeSet author="juanPabloSaucedo" id="20190224-5">
+        <addForeignKeyConstraint baseColumnNames="ADDRESS_ID"
+         baseTableName="USER"
+          constraintName="fk_user_addres"
+           referencedColumnNames="ID_ADDRESS"
+            referencedTableName="ADDRESS"/>
+    </changeSet>
 
-        <addForeignKeyConstraint baseColumnNames="ID_PERM"
-                baseTableName="USER_PERM"
-                constraintName="FK_ID_PERM"
-                deferrable="true"
-                initiallyDeferred="true"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"
-                referencedColumnNames="ID_PERMISSION"
-                referencedTableName="PERMISSION"/>
+     <changeSet author="juanPabloSaucedo" id="20190224-6">
+        <addForeignKeyConstraint baseColumnNames="ROL_ID"
+         baseTableName="JUNCTION_ROL_USER"
+          constraintName="fk_junctionRU_role"
+           referencedColumnNames="ID_ROL"
+            referencedTableName="ROL"/>
+    </changeSet>
 
-        <addForeignKeyConstraint baseColumnNames="ID_ADDRESS"
-                baseTableName="USER"
-                constraintName="FK_ID_ADDRESS"
-                deferrable="true"
-                initiallyDeferred="true"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"
-                referencedColumnNames="ID_ADDRESS"
-                referencedTableName="ADDRESS"/>
+    <changeSet author="juanPabloSaucedo" id="20190224-7">
+        <addForeignKeyConstraint baseColumnNames="USER_ID"
+         baseTableName="JUNCTION_ROL_USER"
+          constraintName="fk_junctionRP_user"
+           referencedColumnNames="ID_USER"
+            referencedTableName="USER"/>
+    </changeSet>
+
+    <changeSet author="juanPabloSaucedo" id="20190224-8">
+    <addPrimaryKey 
+            columnNames="ROL_ID,USER_ID"
+            constraintName="pk_role_user"
+            tableName="JUNCTION_ROL_USER"/>
     </changeSet>
 
 </databaseChangeLog>
